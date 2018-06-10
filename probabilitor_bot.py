@@ -1,4 +1,8 @@
-import logging, random, time, telepot
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+import logging, random
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 from telegram import ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import (TelegramError, Unauthorized, BadRequest, TimedOut, ChatMigrated, NetworkError)
