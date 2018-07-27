@@ -2,12 +2,35 @@
 # -*- coding: utf-8 -*-
 
 
-import logging, random
+import logging, random, os, argparse
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 from telegram import ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import (TelegramError, Unauthorized, BadRequest, TimedOut, ChatMigrated, NetworkError)
 
-TOKEN = '522163911:AAE2to2TTuXANv3dLkfJZlyyktFDI7FjI-8'
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+
+logger = logging.getLogger(__name__)
+
+TELEGRAM_TOKEN = ""
+
+argparser = argparse.ArgumentParser()
+argparser.add_argument("-tgt", "--telegramtoken")
+args = argparser.parse_args()
+
+# Get telegram token
+if args.telegramtoken:
+    TELEGRAM_TOKEN = args.telegramtoken
+if TELEGRAM_TOKEN == "":
+    if "PROBABILITOR_TG_TOKEN" in os.environ:
+        TELEGRAM_TOKEN = os.environ["PROBABILITOR_TG_TOKEN"]
+    else:
+        logger.error(
+            "Telegram Token not provided. Ensure that your bot token is stored in PROBABILITOR_TG_TOKEN"
+            " or supplied as an argument.")
+    exit(-1)
+
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -123,7 +146,7 @@ def error_callback(bot, update, error):
 
 def main():
     """Start the bot."""
-    updater = Updater(token=TOKEN)
+    updater = Updater(token=TELEGRAM_TOKEN)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('add', add, pass_args=True))
     dispatcher.add_handler(CommandHandler('roll', roll, pass_args=True))
