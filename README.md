@@ -1,2 +1,2 @@
 # probabilitor-bot
-Telegram Bot
+Telegram bot derived from the show "Gravity Falls"
