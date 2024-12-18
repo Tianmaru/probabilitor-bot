@@ -53,7 +53,6 @@ async def roll_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     pattern = r"([+-]?)(\d*d\d+|[+-]?\d)"
     rolls = []
     for roll_match in re.finditer(pattern, msg):
-        print(roll_match.groups())
         sign = -1 if roll_match.group(1) == "-" else 1
         if "d" in roll_match.group(2):
             n, sides = roll_match.group(2).split("d")
@@ -93,7 +92,7 @@ def main():
     who_handler = CommandHandler("who", who_callback)
     app.add_handler(who_handler)
 
-    roll_handler = CommandHandler("roll", roll_callback, has_args=True)
+    roll_handler = CommandHandler("roll", roll_callback)
     app.add_handler(roll_handler)
 
     coinflip_handler = CommandHandler("coinflip", coinflip_callback)

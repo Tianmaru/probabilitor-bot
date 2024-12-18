@@ -8,4 +8,4 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 RUN rm requirements.txt
 
-CMD [ "python", "probabilitor_bot.py" ]
+CMD [ "python3", "probabilitor_bot.py" ]
