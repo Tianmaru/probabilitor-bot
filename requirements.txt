@@ -1,4 +1,2 @@
-﻿certifi==2018.4.16
-future==0.16.0
-python-telegram-bot==10.0.1
-six==1.11.0
+﻿python-telegram-bot>=21.9
+python-dotenv>=0.21.0

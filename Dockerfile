@@ -1,9 +1,11 @@
 FROM python:3-alpine
 
-ADD probabilitor_bot.py /
-ADD requirements.txt /
+WORKDIR /app
+
+COPY probabilitor_bot.py .
+COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 RUN rm requirements.txt
 
-CMD [ "python", "./probabilitor_bot.py" ]
+CMD [ "python", "probabilitor_bot.py" ]
