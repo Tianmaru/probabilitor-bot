@@ -42,7 +42,7 @@ async def roll_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Roll dice!"""
     chat_id = update.message.chat_id
     msg = "".join(context.args).replace(" ", "")
-    roll_pattern = r"^(\d*d\d+|\d)([+-](\d*d\d|\d))*$"
+    roll_pattern = r"^(\d*d\d+|\d+)([+-](\d*d\d+|\d+))*$"
     roll_match = re.match(roll_pattern, msg)
     if roll_match is None:
         text = "This spell works nowise!"
@@ -50,7 +50,7 @@ async def roll_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return False
     # unfortunately, re does not capture repeated groups
     # need to iterate over rolls and modifiers individually
-    pattern = r"([+-]?)(\d*d\d+|[+-]?\d)"
+    pattern = r"([+-]?)(\d*d\d+|[+-]?\d+)"
     rolls = []
     for roll_match in re.finditer(pattern, msg):
         sign = -1 if roll_match.group(1) == "-" else 1
